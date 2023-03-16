@@ -5,7 +5,7 @@ Seq2MS
 
 ## How to use
 
-__Before running, pretrained model `long1024_simple_extend_30epoch` can be downloaded from [google drive] and should be placed into this directory.__
+__Before running, pretrained model `pretrained_model.zip` can be downloaded from ProteomeXchange Consortium via the dataset identifier PXD040721 and should be extracted and placed into this directory.__
 
 ### Notes
 
@@ -56,5 +56,5 @@ To train your own model from scratch, run:
 
 `python train_model.py`
 
-The default data source ProteomeTools.mgf is available for download at.
+The default sample data source `ProteomeTools.mgf` is available for download at PXD040721.
 Users will need to edit manually if they wish to use different training data
