@@ -1,7 +1,7 @@
 # Seq2MS
 Seq2MS
 
-
+![](https://github.com/Jerryccm/Seq2MS/blob/master/nist_common_3plot.svg)
 
 ## How to use
 
@@ -37,7 +37,7 @@ More examples are available in `example.tsv`.
 
 For predicting spectral library from list of peptide inputs, run:
 
-`python predict.py --input example.tsv --model long1024_simple_extend_30epoch --output predicted_library.msp`
+`python predict.py --input example.tsv --model pretrained_model --output predicted_library.msp`
 
 The output file is in .msp format
 
@@ -47,7 +47,7 @@ The output file is in .msp format
 
 For evaluating prediction accuracy with existing library, run:
 
-`python evaluate_model.py --data hcd_testingset.mgf --model long1024_simple_extend_30epoch`
+`python evaluate_model.py --data hcd_testingset.mgf --model pretrained_model`
 
 * --data: the input library
 * --model: the model being evaluated
