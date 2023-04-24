@@ -23,7 +23,7 @@ except:
   
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, default='example.tsv')
-parser.add_argument('--model', type=str, default='long1024_simple_extend_30epoch')
+parser.add_argument('--model', type=str, default='pretrained_model')
 parser.add_argument('--output', type=str, default='seq2ms_prediction.msp')
 
 args = parser.parse_args()
