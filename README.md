@@ -5,7 +5,7 @@ Seq2MS
 
 ## How to use
 
-__Before running, pretrained model `pretrained_model.zip` can be downloaded from ProteomeXchange Consortium via the dataset identifier PXD040721 and should be extracted and placed into this directory.__
+__Before running, pretrained model `seq2ms_pretrained_model.zip` can be downloaded from [google drive](https://drive.google.com/drive/folders/16gbW6qa2KdBkDOvyG6McpyUjs-I9jaRc?usp=drive_link) or ProteomeXchange Consortium via the dataset identifier PXD040721 and should be extracted and placed into this directory.__
 
 ### Notes
 
@@ -41,9 +41,9 @@ For predicting spectral library from list of peptide inputs, run:
 
 The output file is in .msp format
 
-* --input: the input file
+* --input: the input file (.tsv)
 * --output: the output file , (optional, output filename will default to the same as input name)
-* --model: the pretrained model
+* --model: the pretrained model name
 
 For evaluating prediction accuracy with existing library, run:
 
