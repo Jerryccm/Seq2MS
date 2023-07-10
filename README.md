@@ -16,7 +16,7 @@ __Before running, pretrained model `seq2ms_pretrained_model.zip` can be download
 ### Required Packages
 
 * Python >= 3.7
-* Tensorflow >= 2.3.0
+* Tensorflow >= 2.3.0 <= 2.8
 * Pandas >= 0.20
 * pyteomics
 * lxml
