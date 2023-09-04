@@ -58,3 +58,21 @@ To train your own model from scratch, run:
 
 The default sample data source `ProteomeTools.mgf` is available for download at PXD040721.
 Users will need to edit manually if they wish to use different training data
+
+##Example workflow
+
+Download Uniprot Protein database fasta file:
+
+![image](https://github.com/Jerryccm/Seq2MS/assets/53712272/a6733114-e99e-4f1e-a65d-324905e2a036)
+
+Digest fasta file to obtain peptide list:
+
+![image](https://github.com/Jerryccm/Seq2MS/assets/53712272/d7257e05-cb6f-40b5-8a7b-fd34bb8aabd9)
+
+Convert peptide list (.txt file) into input format with digested_to_input.py (default predicts all peptides for charge states 2 and 3, modify for higher charge states):
+
+`python digested_to_input.py <peptide.txt> <input.pkl or input.tsv>`
+
+Then run predict.py with the input:
+
+`python predict.py --input input.tsv --model pretrained_model --output predicted_library.msp`
