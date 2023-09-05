@@ -59,7 +59,7 @@ To train your own model from scratch, run:
 The default sample data source `ProteomeTools.mgf` is available for download at PXD040721.
 Users will need to edit manually if they wish to use different training data
 
-##Example workflow
+## Example workflow
 
 Download Uniprot Protein database fasta file:
 
@@ -76,3 +76,9 @@ Convert peptide list (.txt file) into input format with digested_to_input.py (de
 Then run predict.py with the input:
 
 `python predict.py --input input.tsv --model pretrained_model --output predicted_library.msp`
+
+Importing msp library to spectrast: 
+
+`spectrast -cN<library name> predicted_library.msp`
+if it is a decoy library, then:
+`spectrast -cmDECOY -c_NPK0 -cN<library name> predicted_library.msp`
