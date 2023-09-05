@@ -67,7 +67,7 @@ Download Uniprot Protein database fasta file:
 
 Digest fasta file to obtain peptide list:
 
-![image](https://github.com/Jerryccm/Seq2MS/assets/53712272/d7257e05-cb6f-40b5-8a7b-fd34bb8aabd9)
+![image](https://github.com/Jerryccm/Seq2MS/assets/53712272/05698e32-43b3-4210-bcb4-0ac39c2e11be)
 
 Convert peptide list (.txt file) into input format with digested_to_input.py (default predicts all peptides for charge states 2 and 3, modify for higher charge states):
 
