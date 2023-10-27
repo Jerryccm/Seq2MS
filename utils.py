@@ -176,7 +176,8 @@ def embed_maxquant(sp, mass_scale=MAX_MZ, augment=True, fixedaugment = False, ke
             encoding[i][6:12] = atoms[pep[i]] * mass_weight
             continue
         encoding[i][:6] = atoms[pep[i]] * mass_weight
-    encoding[-1][charge] = 1       
+    encoding[-1][charge] = 1    
+    encoding[-1][-1] = sp['NCE'] / 100 if 'NCE' in sp else 0.25    
 
     #add modification
     modlist, poslist = find_mod(sp['Modified sequence'])
@@ -268,7 +269,7 @@ def write_msp(out, sps, peps):
 
     def f4(x): return "{0:.4f}".format(x)
 
-    def sparse(x, y, th=0.005):
+    def sparse(x, y, th=0.02): #0.02
         x = np.asarray(x, dtype='float32')
         y = np.asarray(y, dtype='float32')
         y /= np.max(y)
@@ -278,14 +279,15 @@ def write_msp(out, sps, peps):
         precision = 0.1
         low = 0
         dim = 20000
-        
-        sp[min(math.ceil(float(pep['Mass']) * int(pep['Charge']) / precision), len(sp)):] = 0
+        #pep['Mass'] = 1000
+        #sp[min(math.ceil(float(pep['Mass']) * int(pep['Charge']) / precision), len(sp)):] = 0
         imz = np.arange(0, dim, dtype='int32') * precision + low  # more acurate
         mzs, its = sparse(imz, sp)
         
         seq = pep['Sequence']
         charge = pep['Charge']
         mass = pep['Mass']
+        protein = pep['Protein']
         modlist, poslist = find_mod(pep['Modified sequence'])
         for i in range(len(poslist)):
             for mod in pep['Modification'].split(','):
@@ -295,7 +297,7 @@ def write_msp(out, sps, peps):
 
         modstr = str(len(poslist)) + ''.join([f'({p},{seq[p]},{m})' for m, p in zip(modlist, poslist)]) if poslist != [] else '0'
         head = (f"Name: {seq}/{charge}_{modstr}\n"
-                f"Comment: Charge={charge} Parent={mass/charge} Mods={modstr}\n"
+                f"Comment: Charge={charge} Parent={mass/charge} Mods={modstr} Protein={protein}\n"
                 f"Num peaks: {len(mzs)}\n")
         peaks = [f"{f2(mz)}\t{f4(it * 1000)}" for mz, it in zip(mzs, its)]
 

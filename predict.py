@@ -13,22 +13,37 @@ import sys
 import pickle
 import tensorflow.keras as k
 from tensorflow.keras import backend as K
+import ast
 
 physical_devices = tf.config.list_physical_devices('GPU')
-try:
-  tf.config.experimental.set_memory_growth(physical_devices[0], True)
-except:
+#try:
+#  tf.config.experimental.set_memory_growth(physical_devices[0], True)
+#except:
   # Invalid device or cannot modify virtual devices once initialized.
-  pass
+#  pass
   
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, default='example.tsv')
-parser.add_argument('--model', type=str, default='long1024_simple_extend_30epoch')
+parser.add_argument('--model', type=str, default='pretrained_model')
 parser.add_argument('--output', type=str, default='seq2ms_prediction.msp')
+parser.add_argument('--mod', type=str, help='A dictionary argument or txt file', required=False)
 
 args = parser.parse_args()
+if args.mod:
+    if args.mod.endswith('}'):
+        new_mod = ast.literal_eval(args.mod)
+        mods.update(new_mod)
+    else:  
+        with open(args.mod, 'r') as file:
+            first_line = file.readline()
+        new_mod = ast.literal_eval(first_line)
+        mods.update(new_mod)
 
-data = pd.read_csv(args.input, sep='\t')
+if args.input.endswith('.pkl'):
+    data = pd.read_pickle(args.input)
+else:
+    data = pd.read_csv(args.input, sep='\t')
+    
 data = data[data['Sequence'].str.contains('X') == False]
 data = data[data['Sequence'].str.contains('U') == False]
 data = data[data['Sequence'].str.contains('O') == False]
@@ -68,9 +83,6 @@ class input_generator(k.utils.Sequence):
 
 types = (tf.float16)
 shapes = ((MAX_PEPTIDE_LENGTH+2, encoding_dimension))
-#test_dataset = tf.data.Dataset.from_generator(testgen, output_types=types, output_shapes=shapes)
-#test_dataset = tf.data.Dataset.from_generator(input_generator(embedded_data,batch_size), output_types=types, output_shapes=shapes)
-#test_dataset = test_dataset.batch(batch_size)
 generator = input_generator(embedded_data,data,batch_size)
 
 if args.output == 'seq2ms_prediction.msp':
