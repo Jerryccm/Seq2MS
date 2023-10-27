@@ -14,7 +14,7 @@ except:
    
 parser = argparse.ArgumentParser()
 parser.add_argument('--data', type=str, default='hcd_testingset.mgf')
-parser.add_argument('--model', type=str, default='long1024_simple_extend_30epoch')
+parser.add_argument('--model', type=str, default='pretrained_model')
 
 args = parser.parse_args()
 
