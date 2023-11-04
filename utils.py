@@ -1,14 +1,7 @@
-import math
-from pyteomics import mgf, mass
-import argparse
-import pandas as pd
-import pickle
-import random
+from pyteomics import mgf
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras as k
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dense, Add, Flatten, Activation, BatchNormalization
-from tensorflow.keras import Model, Input
 
 SPECTRA_DIMENSION = 20000
 BIN_SIZE = 0.1

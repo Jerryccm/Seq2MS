@@ -1,5 +1,6 @@
 # Seq2MS
-Seq2MS
+Seq2MS is a neural network tool to predict tandem mass spectrum for given peptide sequences.
+DOI: https://doi.org/10.1021/acs.jproteome.3c00180
 
 ![](https://github.com/Jerryccm/Seq2MS/blob/master/nist_common_3plot.svg)
 
@@ -7,11 +8,14 @@ Seq2MS
 
 __Before running, pretrained model `seq2ms_pretrained_model.zip` can be downloaded from [google drive](https://drive.google.com/drive/folders/16gbW6qa2KdBkDOvyG6McpyUjs-I9jaRc?usp=drive_link) or ProteomeXchange Consortium via the dataset identifier PXD040721 and should be extracted and placed into this directory.__
 
+## Resources
+Prebuilt spectral libraries available for download from [google drive](https://drive.google.com/drive/folders/16gbW6qa2KdBkDOvyG6McpyUjs-I9jaRc?usp=drive_link)
+
 ### Notes
 
 * Modifications should follow the format in Maxquant outputs 
 * The prediction will NOT output peaks with M/z > 2000
-* Minimum intensity for predicted peaks to be present in output library is 0.5% of the strongest peak in spectrum
+* Minimum intensity for predicted peaks to be present in output library is 0.5% of the most intense peak in spectrum
 
 ### Required Packages
 
@@ -44,6 +48,7 @@ The output file is in .msp format
 * --input: the input file (.tsv)
 * --output: the output file , (optional, output filename will default to the same as input name)
 * --model: the pretrained model name
+* --mod: (Optional, str ) For defining custom modifications in the form of a dictionary: "{'custom':[9,9,9,9,9,9]}" # Atom counts [C,H,N,O,S,P]
 
 For evaluating prediction accuracy with existing library, run:
 

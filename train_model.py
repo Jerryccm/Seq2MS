@@ -1,16 +1,11 @@
-import math
-from pyteomics import mgf, mass
-import argparse
-import pandas as pd
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras as k
 from tensorflow.keras import layers
 from utils import *
-import pickle
 from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dense, Add, Flatten, Activation, BatchNormalization
-from tensorflow.keras import Model, Input
+from tensorflow.keras.layers import Conv1D, Dense, Add, Activation, BatchNormalization
+from tensorflow.keras import Input
     
 print('Loading data...')
 train_data = readmgf("ProteomeTools.mgf")

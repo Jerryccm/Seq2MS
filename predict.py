@@ -1,18 +1,11 @@
 import math
-from pyteomics import mgf, mass
 import argparse
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-from tensorflow import keras as K
-from tensorflow.keras import layers
 from utils import *
-import matplotlib.pyplot as plt
-import random
 import sys
-import pickle
 import tensorflow.keras as k
-from tensorflow.keras import backend as K
 import ast
 
 physical_devices = tf.config.list_physical_devices('GPU')
@@ -29,20 +22,28 @@ parser.add_argument('--output', type=str, default='seq2ms_prediction.msp')
 parser.add_argument('--mod', type=str, help='A dictionary argument or txt file', required=False)
 
 args = parser.parse_args()
-if args.mod:
-    if args.mod.endswith('}'):
-        new_mod = ast.literal_eval(args.mod)
-        mods.update(new_mod)
-    else:  
-        with open(args.mod, 'r') as file:
-            first_line = file.readline()
-        new_mod = ast.literal_eval(first_line)
-        mods.update(new_mod)
+try:
+    if args.mod:
+        if args.mod.endswith('}'):
+            new_mod = ast.literal_eval(args.mod)
+            mods.update(new_mod)
+        else:  
+            with open(args.mod, 'r') as file:
+                first_line = file.readline()
+            new_mod = ast.literal_eval(first_line)
+            mods.update(new_mod)
+except Exception as e:
+    print("Error occurred while handling modifications: Check input string / file", e)
+    sys.exit(1)
 
-if args.input.endswith('.pkl'):
-    data = pd.read_pickle(args.input)
-else:
-    data = pd.read_csv(args.input, sep='\t')
+try:
+    if args.input.endswith('.pkl'):
+        data = pd.read_pickle(args.input)
+    else:
+        data = pd.read_csv(args.input, sep='\t')
+except Exception as e:
+    print("Error occurred while loading or preprocessing the input data:", e)
+    sys.exit(1)
     
 data = data[data['Sequence'].str.contains('X') == False]
 data = data[data['Sequence'].str.contains('U') == False]
