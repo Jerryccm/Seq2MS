@@ -1,5 +1,6 @@
 # Seq2MS
 Seq2MS is a neural network tool to predict tandem mass spectrum for given peptide sequences.
+
 DOI: https://doi.org/10.1021/acs.jproteome.3c00180
 
 ![](https://github.com/Jerryccm/Seq2MS/blob/master/nist_common_3plot.svg)
