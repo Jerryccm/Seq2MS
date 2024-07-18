@@ -8,9 +8,9 @@ import sys
 
 data = pd.read_csv(sys.argv[1], sep='\t')
 
-df = []
-for i in range(len(data)):
-    df.append({'Sequence':data.iloc[i]['Sequence'], 'Mass':data.iloc[i]['Monoisotopic_Mass'], 'len':len(data.iloc[i]['Sequence']), 'Protein':data.iloc[i]['Protein_Name']})
+data["len"] = data["Sequence"].astype(str).str.len()
+df = data[['Sequence','Monoisotopic_Mass','len', 'Protein_Name']]
+df = df.rename(columns={"Monoisotopic_Mass":"Mass", "Protein_Name":"Protein"})
 
 print(len(df))
 df = pd.DataFrame(df)
